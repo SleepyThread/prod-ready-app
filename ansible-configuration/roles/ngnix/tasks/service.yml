@@ -1,5 +1,5 @@
 ---
-  - name: Start Ngnix Services
+  - name: start ngnix services
     service: 
-      name: nginx 
+      name: nginx
       state: started

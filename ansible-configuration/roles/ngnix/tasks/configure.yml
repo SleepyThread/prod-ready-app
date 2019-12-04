@@ -1,7 +1,6 @@
 ---
   - name: configure default site configurations
-    copy: src=default.conf dest=/etc/nginx/sites-available/default mode=0644
-    notify:
-    - restart: Start Ngnix Services
+    template: src=default.conf dest=/etc/nginx/sites-available/default mode=0644
+    notify: restart ngnix services
   - name: copy default page
-    copy: src=index.html dest=/var/www/html mode=0644
+    template: src=index.html dest=/var/www/html mode=0644

@@ -1,2 +1,5 @@
 ---
-# handlers file for ngnix
+  - name: restart ngnix services
+    service:
+      name: nginx
+      state: restarted

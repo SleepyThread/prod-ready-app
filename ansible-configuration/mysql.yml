@@ -1,0 +1,11 @@
+---
+# This playbook deploys a Mysql Server.
+
+- hosts: dbserver
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+  roles:
+    - common
+    - mysql

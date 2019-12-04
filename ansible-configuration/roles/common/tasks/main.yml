@@ -1,0 +1,11 @@
+---
+# tasks file for common
+- name: Adding Runner group.
+  group: name=runner state=present
+
+- name: Adding Web User 
+  user: 
+    name: devops
+    comment: "Devops User"
+    uid: 2001
+    state: present

@@ -1,0 +1,11 @@
+---
+# This playbook deploys a Web Server.
+
+- hosts: webserver
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+  roles:
+    - common
+    - ngnix

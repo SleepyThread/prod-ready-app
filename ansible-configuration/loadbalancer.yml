@@ -1,0 +1,11 @@
+---
+# This playbook deploys a Web Server.
+
+- hosts: loadbalancer
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+  roles:
+  - common
+  - haproxy

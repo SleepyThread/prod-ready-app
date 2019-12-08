@@ -1,0 +1,10 @@
+---
+# defaults file for keepalived
+  digital_floating_ip:
+  digital_ocean_url: 169.254.169.254
+  digital_ocean_token:
+  router_id:
+  private_interface:
+  primary_hp_proxy_private_ip:
+  secondary_hp_proxy_private_ip:
+  ha_proxy_password:

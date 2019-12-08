@@ -1,0 +1,40 @@
+{% if primary_lb == 'true' %}
+  {% set ha_proxy_state = 'MASTER' %}
+  {% set ha_priority = '200' %}
+  {% set lb_ha_proxy_self_private_id = primary_hp_proxy_private_ip %}
+  {% set lb_ha_proxy_peer_private_id = secondary_hp_proxy_private_ip  %}
+{% else %}
+  {% set ha_proxy_state = 'BACKUP' %}
+  {% set ha_priority = '100' %}
+  {% set lb_ha_proxy_self_private_id =  secondary_hp_proxy_private_ip  %}
+  {% set lb_ha_proxy_peer_private_id = primary_hp_proxy_private_ip  %}
+{% endif %}
+
+vrrp_script chk_haproxy {
+    script "service haproxy status"
+    interval 2
+}
+
+vrrp_instance VI_1 {
+    interface eth1
+    state {{ ha_proxy_state }}
+    priority {{ ha_priority }}
+
+    virtual_router_id {{ router_id }}
+    unicast_src_ip {{ lb_ha_proxy_self_private_id }}
+    unicast_peer {
+        {{ lb_ha_proxy_peer_private_id }}
+    }
+
+    authentication {
+            auth_type PASS
+            auth_pass {{ ha_proxy_password }}
+    }
+
+   track_script {
+        chk_haproxy
+    }
+
+    notify_master /etc/keepalived/master.sh
+
+}

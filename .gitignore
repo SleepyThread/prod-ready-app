@@ -37,3 +37,4 @@ react-frontend/yarn-error.log*
 
 
 ansible-configuration/host
+ansible-configuration/roles/*/defaults/*_backup.yml

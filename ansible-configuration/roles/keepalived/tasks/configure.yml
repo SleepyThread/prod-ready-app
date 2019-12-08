@@ -1,0 +1,11 @@
+---
+  - name: setup digitalocean assing ip script
+    get_url:
+      url: http://do.co/assign-ip
+      dest: /usr/local/bin/assign-ip
+      mode: 0500
+  - name: setup master update script
+    template: src=master.sh.j2 dest=/etc/keepalived/master.sh mode=0500
+  - name: keep alive conf
+    template: src=keepalived.conf.j2 dest=/etc/keepalived/keepalived.conf
+    notify: restart keepalived

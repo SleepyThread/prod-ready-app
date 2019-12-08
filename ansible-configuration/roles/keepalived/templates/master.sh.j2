@@ -1,0 +1,16 @@
+#!/bin/sh
+
+export DO_TOKEN='{{ digital_ocean_token }}'
+IP={{ digital_floating_ip }}
+ID=$(curl -s http://{{ digital_ocean_url }}/metadata/v1/id)
+HAS_FLOATING_IP=$(curl -s http://{{ digital_ocean_url }}/metadata/v1/floating_ip/ipv4/active)
+
+if [ $HAS_FLOATING_IP = "false" ]; then
+    n=0
+    while [ $n -lt 10 ]
+    do
+        python3 /usr/local/bin/assign-ip $IP $ID && break
+        n=$((n+1))
+        sleep 3
+    done
+fi

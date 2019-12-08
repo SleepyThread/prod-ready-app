@@ -1,0 +1,7 @@
+---
+  - name: add dependencies and package
+    apt:
+      pkg:
+      - "linux-headers-{{ ansible_kernel }}"
+      - keepalived
+      state: present
